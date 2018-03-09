@@ -18,7 +18,7 @@
                 ?>
                 <tr>
                     <td><?= $oDiplome->CODEDIP ?></td>
-                    <td><?= $oDiplome->CODEU ?></td>
+                    <td><?= $aUniversites[$oDiplome->CODEU] ?></td>
                     <td><?= $oDiplome->INTITULEDIP ?></td>
                     <td><?= $oDiplome->ADRESSEWEBD ?></td>
                     <td><?= $oDiplome->NIVEAU ?></td>

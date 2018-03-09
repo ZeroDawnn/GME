@@ -4,13 +4,25 @@
     <form>
         <div class="form-group">
             <label for="universite">Université</label>
-            <select class="form-control" id="universite">
-                <option value="1"></option>
+            <select class="form-control" id="universite" name="universite">
+                <?php
+                foreach ($aUniversites as $codeU => $nomU) {
+                    ?>
+                    <option value = "<?= $codeU ?>"><?= $nomU ?></option>
+                <?php } ?>
             </select>
         </div>
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Email address</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+        <div class = "form-group">
+            <label for="intitule">Intitulé</label>
+            <input type="text" class="form-control" id="intitule" name="intitule" placeholder="DUT exemple">
+        </div>
+        <div class = "form-group">
+            <label for="intitule">Intitulé</label>
+            <input type="text" class="form-control" id="intitule" name="intitule" placeholder="DUT exemple">
+        </div>
+        <div class = "form-group">
+            <label for="intitule">Intitulé</label>
+            <input type="text" class="form-control" id="intitule" name="intitule" placeholder="DUT exemple">
         </div>
     </form>
 </section>

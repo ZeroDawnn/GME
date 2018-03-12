@@ -18,13 +18,46 @@ class Diplomes extends CI_Controller {
         $this->load->view('templates/footer', $aData);
     }
 
-    public function editer($codeD) {
-        $aData['aUniversites'] = $this->universites_m->get_all_only_name();
-        $aData['oDiplome'] = $this->diplomes_m->get_by_codeD($codeD);
+    public function editer($codeD = null) {
 
-        $this->load->view('templates/header', $aData);
-        $this->load->view('diplomes/editer.php', $aData);
-        $this->load->view('templates/footer', $aData);
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules(
+                array(
+                    array(
+                        'field' => 'universite',
+                        'label' => 'Université',
+                        'rules' => 'required'
+                    ), array(
+                        'field' => 'intitule',
+                        'label' => 'Intitulé',
+                        'rules' => 'required'
+                    ), array(
+                        'field' => 'adresseWeb',
+                        'label' => 'Adresse Web',
+                        'rules' => 'required'
+                    ), array(
+                        'field' => 'niveau',
+                        'label' => 'Niveau',
+                        'rules' => 'required'
+                    )
+                )
+        );
+
+        if ($this->form_validation->run() === FALSE) {
+            $aData['aUniversites'] = $this->universites_m->get_all_only_name();
+            $aData['oDiplome'] = $this->diplomes_m->get_by_codeD($codeD);
+
+
+            $this->load->view('templates/header', $aData);
+            $this->load->view('diplomes/editer.php', $aData);
+            $this->load->view('templates/footer', $aData);
+        } else {
+            $this->diplomes_m->edit_by_codeD($codeD);
+            
+            redirect('/Diplomes');
+        }
     }
 
 }

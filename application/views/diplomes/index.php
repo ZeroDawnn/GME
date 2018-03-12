@@ -1,6 +1,15 @@
 <section class="container">
+
     <h1>Diplomes</h1>
-    <h2>Tous les diplomes</h2> 
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="<?= base_url('Diplomes') ?>">Consulter les diplomes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('Ajouter') ?>">Ajouter un diplome</a>
+        </li>
+    </ul>
+    <h2>Consulter les diplomes</h2>
     <table class="table">
         <thead>
             <tr>

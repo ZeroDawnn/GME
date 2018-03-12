@@ -21,7 +21,14 @@ class Diplomes_m extends CI_Model {
     }
 
     public function edit_by_codeD($codeD) {
-        
+        $this->db->set(array(
+            'CODEU' => $this->input->post('universite'),
+            'INTITULEDIP' => $this->input->post('intitule'),
+            'ADRESSEWEBD' => $this->input->post('adresseWeb'),
+            'NIVEAU' => $this->input->post('niveau')
+        ));
+        $this->db->where('CODEDIP', $codeD);
+        $this->db->update('diplomes');
     }
 
 }

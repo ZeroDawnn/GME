@@ -8,7 +8,7 @@
             <a class="nav-link" href="<?= base_url('Ajouter') ?>">Ajouter un diplome</a>
         </li>
     </ul>
-    <h2>Editer le diplome <?= $oDiplome->INTITULEDIP ?></h2>
+    <h2>Ajouter un diplome</h2>
     <?= validation_errors(); ?>
     <?= form_open('Diplomes/editer/' . $oDiplome->CODEDIP); ?>
     <div class="form-group">

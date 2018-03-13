@@ -6,7 +6,7 @@
             <a class="nav-link active" href="<?= base_url('Diplomes') ?>">Consulter les diplomes</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('Ajouter') ?>">Ajouter un diplome</a>
+            <a class="nav-link" href="<?= base_url('Diplomes/ajouter') ?>">Ajouter un diplome</a>
         </li>
     </ul>
     <table class="table">

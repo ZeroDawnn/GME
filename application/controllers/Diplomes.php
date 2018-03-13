@@ -20,6 +20,29 @@ class Diplomes extends CI_Controller {
         $config['total_rows'] = $this->diplomes_m->get_total_count();
         $config['per_page'] = $limit;
 
+        $config['num_links'] = 2;
+        $config['use_page_numbers'] = TRUE;
+        $config['reuse_query_string'] = TRUE;
+
+        $config['full_tag_open'] = '<nav aria-label="Page navigation example"><ul class="pagination">';
+        $config['full_tag_close'] = '</ul></nav>';
+
+        $config['next_link'] = 'Suivant';
+        $config['next_tag_open'] = '<li class="page-item">';
+        $config['next_tag_close'] = '</li>';
+
+        $config['prev_link'] = 'Précédent';
+        $config['prev_tag_open'] = '<li class="page-item">';
+        $config['prev_tag_close'] = '</li>';
+
+        $config['cur_tag_open'] = '<li class="page-item active"><span class="page-link">';
+        $config['cur_tag_close'] = '</span></li>';
+
+        $config['num_tag_open'] = '<li class="page-item axtive">';
+        $config['num_tag_close'] = '</li>';
+        
+        $config['attributes'] = array('class' => 'page-link');
+
         $this->pagination->initialize($config);
 
         $aData['pagination'] = $this->pagination->create_links();
@@ -67,6 +90,46 @@ class Diplomes extends CI_Controller {
         } else {
             $this->diplomes_m->edit_by_codeD($codeD);
 
+            redirect('/Diplomes');
+        }
+    }
+    
+    public function ajouter() {
+
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules(
+                array(
+                    array(
+                        'field' => 'universite',
+                        'label' => 'Université',
+                        'rules' => 'required'
+                    ), array(
+                        'field' => 'intitule',
+                        'label' => 'Intitulé',
+                        'rules' => 'required'
+                    ), array(
+                        'field' => 'adresseWeb',
+                        'label' => 'Adresse Web',
+                        'rules' => 'required'
+                    ), array(
+                        'field' => 'niveau',
+                        'label' => 'Niveau',
+                        'rules' => 'required'
+                    )
+                )
+        );
+
+        if ($this->form_validation->run() === FALSE) {
+            $aData['aUniversites'] = $this->universites_m->get_all_only_name();
+
+            $this->load->view('templates/header', $aData);
+            $this->load->view('diplomes/ajouter.php', $aData);
+            $this->load->view('templates/footer', $aData);
+        } else {
+            $this->diplomes_m->add();
+            
             redirect('/Diplomes');
         }
     }

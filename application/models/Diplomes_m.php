@@ -6,7 +6,17 @@ class Diplomes_m extends CI_Model {
         $this->load->database();
     }
 
+    public function get_total_count() {
+        return $this->db->count_all('diplomes');
+    }
+
     public function get_all() {
+        $query = $this->db->get('diplomes');
+        return $query->result();
+    }
+
+    public function get_page($limit, $start) {
+        $this->db->limit($limit, $start);
         $query = $this->db->get('diplomes');
         return $query->result();
     }

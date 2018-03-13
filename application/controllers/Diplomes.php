@@ -9,9 +9,20 @@ class Diplomes extends CI_Controller {
         $this->load->helper('url_helper');
     }
 
-    public function index() {
+    public function index($start = 0) {
+        $this->load->library('pagination');
+
+        $limit = 10;
         $aData['aUniversites'] = $this->universites_m->get_all_only_name();
-        $aData['aDiplomes'] = $this->diplomes_m->get_all();
+        $aData['aDiplomes'] = $this->diplomes_m->get_page($limit, $start);
+
+        $config['base_url'] = base_url() . '/Diplomes/';
+        $config['total_rows'] = $this->diplomes_m->get_total_count();
+        $config['per_page'] = $limit;
+
+        $this->pagination->initialize($config);
+
+        $aData['pagination'] = $this->pagination->create_links();
 
         $this->load->view('templates/header', $aData);
         $this->load->view('diplomes/index.php', $aData);
@@ -55,7 +66,7 @@ class Diplomes extends CI_Controller {
             $this->load->view('templates/footer', $aData);
         } else {
             $this->diplomes_m->edit_by_codeD($codeD);
-            
+
             redirect('/Diplomes');
         }
     }

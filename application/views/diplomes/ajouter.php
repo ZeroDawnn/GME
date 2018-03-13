@@ -1,5 +1,5 @@
 <section class="container">
-    <h1>Diplomes</h1>
+    <h2>Diplomes</h2>
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a class="nav-link" href="<?= base_url('Diplomes') ?>">Consulter les diplomes</a>
@@ -8,7 +8,6 @@
             <a class="nav-link" href="<?= base_url('Ajouter') ?>">Ajouter un diplome</a>
         </li>
     </ul>
-    <h2>Ajouter un diplome</h2>
     <?= validation_errors(); ?>
     <?= form_open('Diplomes/editer/' . $oDiplome->CODEDIP); ?>
     <div class="form-group">

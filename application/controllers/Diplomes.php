@@ -9,39 +9,16 @@ class Diplomes extends CI_Controller {
         $this->load->helper('url_helper');
     }
 
-    public function index($start = 0) {
+    public function index($page = 1) {
         $this->load->library('pagination');
 
         $limit = 10;
         $aData['aUniversites'] = $this->universites_m->get_all_only_name();
-        $aData['aDiplomes'] = $this->diplomes_m->get_page($limit, $start);
+        $aData['aDiplomes'] = $this->diplomes_m->get_page($limit, $page * $limit - $limit);
 
-        $config['base_url'] = base_url() . '/Diplomes/';
+        $config['base_url'] = base_url() . '/Diplomes/page';
         $config['total_rows'] = $this->diplomes_m->get_total_count();
         $config['per_page'] = $limit;
-
-        $config['num_links'] = 2;
-        $config['use_page_numbers'] = TRUE;
-        $config['reuse_query_string'] = TRUE;
-
-        $config['full_tag_open'] = '<nav aria-label="Page navigation example"><ul class="pagination">';
-        $config['full_tag_close'] = '</ul></nav>';
-
-        $config['next_link'] = 'Suivant';
-        $config['next_tag_open'] = '<li class="page-item">';
-        $config['next_tag_close'] = '</li>';
-
-        $config['prev_link'] = 'Précédent';
-        $config['prev_tag_open'] = '<li class="page-item">';
-        $config['prev_tag_close'] = '</li>';
-
-        $config['cur_tag_open'] = '<li class="page-item active"><span class="page-link">';
-        $config['cur_tag_close'] = '</span></li>';
-
-        $config['num_tag_open'] = '<li class="page-item axtive">';
-        $config['num_tag_close'] = '</li>';
-        
-        $config['attributes'] = array('class' => 'page-link');
 
         $this->pagination->initialize($config);
 
@@ -80,6 +57,7 @@ class Diplomes extends CI_Controller {
         );
 
         if ($this->form_validation->run() === FALSE) {
+            $aData['action'] = 'edit';
             $aData['aUniversites'] = $this->universites_m->get_all_only_name();
             $aData['oDiplome'] = $this->diplomes_m->get_by_codeD($codeD);
 
@@ -93,8 +71,9 @@ class Diplomes extends CI_Controller {
             redirect('/Diplomes');
         }
     }
-    
+
     public function ajouter() {
+        $aData['action'] = 'add';
 
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -129,7 +108,7 @@ class Diplomes extends CI_Controller {
             $this->load->view('templates/footer', $aData);
         } else {
             $this->diplomes_m->add();
-            
+
             redirect('/Diplomes');
         }
     }

@@ -21,13 +21,18 @@ class Diplomes_m extends CI_Model {
         return $query->result();
     }
 
-    public function add() {
-        
-    }
-
     public function get_by_codeD($codeD) {
         $query = $this->db->get_where('diplomes', array('CODEDIP =' => $codeD));
         return $query->row();
+    }
+
+    public function add() {
+        return $this->db->insert('diplomes', array(
+                    'CODEU' => $this->input->post('universite'),
+                    'INTITULEDIP' => $this->input->post('intitule'),
+                    'ADRESSEWEBD' => $this->input->post('adresseWeb'),
+                    'NIVEAU' => $this->input->post('niveau')
+        ));
     }
 
     public function edit_by_codeD($codeD) {

@@ -1,14 +1,14 @@
 <section class="container">
-    <h2>Diplomes</h2>
+    <h2>Diplômes</h2>
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link active" href="<?= base_url('Diplomes/editer/' . $oDiplome->CODEDIP) ?>">Éditer le diplome <?= $oDiplome->INTITULEDIP ?></a>
+            <a class="nav-link active" href="<?= base_url('Diplomes/editer/' . $oDiplome->CODEDIP) ?>">Éditer le diplôme <?= $oDiplome->INTITULEDIP ?></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('Diplomes') ?>">Consulter les diplomes</a>
+            <a class="nav-link" href="<?= base_url('Diplomes') ?>">Consulter les diplômes</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('Diplomes/ajouter') ?>">Ajouter un diplome</a>
+            <a class="nav-link" href="<?= base_url('Diplomes/ajouter') ?>">Ajouter un diplôme</a>
         </li>
     </ul>
     <?php $this->view('diplomes/form.php'); ?>

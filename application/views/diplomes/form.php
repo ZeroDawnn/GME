@@ -6,6 +6,7 @@
 </div>
 <div class = "form-group">
     <?= form_label('Intitulé', 'intitule'); ?>
+    <?= form_error('intitule'); ?>
     <?=
     form_input(array(
         'class' => 'form-control',

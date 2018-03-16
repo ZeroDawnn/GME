@@ -19,5 +19,8 @@ $config['cur_tag_close'] = '</span></li>';
 $config['num_tag_open'] = '<li class="page-item axtive">';
 $config['num_tag_close'] = '</li>';
 
+$config['first_link'] = 'Première';
+$config['last_link'] = 'Dernière';
+
 $config['attributes'] = array('class' => 'page-link');
 

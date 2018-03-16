@@ -1,19 +1,19 @@
 <section class="container">
 
-    <h2>Diplomes</h2>
+    <h2>Diplômes</h2>
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link active" href="<?= base_url('Diplomes') ?>">Consulter les diplomes</a>
+            <a class="nav-link active" href="<?= base_url('Diplomes') ?>">Consulter les diplômes</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('Diplomes/ajouter') ?>">Ajouter un diplome</a>
+            <a class="nav-link" href="<?= base_url('Diplomes/ajouter') ?>">Ajouter un diplôme</a>
         </li>
     </ul>
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Code Diplome</th>
-                <th scope="col">Code Université</th>
+                <th scope="col">Code diplôme</th>
+                <th scope="col">Université</th>
                 <th scope="col">Intitulé</th>
                 <th scope="col">Adresse Web</th>
                 <th scope="col">Niveau</th>

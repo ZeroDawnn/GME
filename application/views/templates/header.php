@@ -13,13 +13,13 @@
                 <nav class="col-xs-3 ">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="<?= base_url('Diplomes') ?>">
                                 Diplomes
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                Étudiant
+                            <a class="nav-link" href="<?= base_url('Etudiants') ?>">
+                                Étudiants
                             </a>
                         </li>
                         <li class="nav-item">

@@ -52,5 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Diplomes';
 $route['Diplomes/page'] = 'Diplomes/index/1';
 $route['Diplomes/page/(:num)'] = 'Diplomes/index/$1';
+$route['Etudiants/page'] = 'Etudiants/index/1';
+$route['Etudiants/page/(:num)'] = 'Etudiants/index/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

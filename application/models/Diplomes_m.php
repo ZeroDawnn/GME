@@ -15,6 +15,18 @@ class Diplomes_m extends CI_Model {
         return $query->result();
     }
 
+    public function get_all_only_entitled() {
+        $this->db->select('CODEDIP, INTITULEDIP');
+        $query = $this->db->get('diplomes');
+        $aDiplomes = $query->result();
+
+        $aReturn = array();
+        foreach ($aDiplomes as $oDiplome) {
+            $aReturn[$oDiplome->CODEDIP] = $oDiplome->INTITULEDIP;
+        }
+        return $aReturn;
+    }
+
     public function get_page($limit, $start) {
         $this->db->limit($limit, $start);
         $query = $this->db->get('diplomes');
@@ -28,6 +40,7 @@ class Diplomes_m extends CI_Model {
 
     public function add() {
         return $this->db->insert('diplomes', array(
+                    'NUMETUDIANT' => $this->input->post('numE'),
                     'CODEU' => $this->input->post('universite'),
                     'INTITULEDIP' => $this->input->post('intitule'),
                     'ADRESSEWEBD' => $this->input->post('adresseWeb'),
@@ -44,6 +57,10 @@ class Diplomes_m extends CI_Model {
         ));
         $this->db->where('CODEDIP', $codeD);
         $this->db->update('diplomes');
+    }
+
+    public function delete_by_codeD($codeD) {
+        $this->db->delete('diplomes', array('CODEDIP' => $codeD));
     }
 
 }

@@ -34,7 +34,7 @@ class Diplomes_m extends CI_Model {
     }
 
     public function get_by_codeD($codeD) {
-        $query = $this->db->get_where('diplomes', array('CODEDIP =' => $codeD));
+        $query = $this->db->get_where('diplomes', array('CODEDIP' => $codeD));
         return $query->row();
     }
 

@@ -59,7 +59,7 @@
     ?>
 </div>
 <div class = "form-group">
-    <?= form_submit('enregistrer', $action == 'add' ? 'Ajouter' : 'Éditer', array('class' => 'btn btn-primary',)) ?>
+    <?= form_submit('valider', $action == 'add' ? 'Ajouter' : 'Éditer', array('class' => 'btn btn-primary',)) ?>
 </div>
 <?= form_close() ?>
 

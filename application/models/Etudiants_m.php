@@ -22,7 +22,7 @@ class Etudiants_m extends CI_Model {
     }
 
     public function get_by_numE($numE) {
-        $query = $this->db->get_where('etudiants', array('NUMETUDIANT =' => $numE));
+        $query = $this->db->get_where('etudiants', array('NUMETUDIANT' => $numE));
         return $query->row();
     }
 

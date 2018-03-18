@@ -56,5 +56,7 @@ $route['Etudiants/page'] = 'Etudiants/index/1';
 $route['Etudiants/page/(:num)'] = 'Etudiants/index/$1';
 $route['Cours/page'] = 'Cours/index/1';
 $route['Cours/page/(:num)'] = 'Cours/index/$1';
+$route['Programmes/page'] = 'Programmes/index/1';
+$route['Programmes/page/(:num)'] = 'Programmes/index/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

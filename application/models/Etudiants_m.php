@@ -28,26 +28,26 @@ class Etudiants_m extends CI_Model {
 
     public function add() {
         return $this->db->insert('etudiants', array(
-                    'CODEDIP' => $this->input->post('codeD'),
-                    'NOMET' => $this->input->post('nom'),
-                    'PRENOMET' => $this->input->post('prenom'),
-                    'EMAIL' => $this->input->post('email'),
-                    'CV' => $this->input->post('cv')
+                    'CODEDIP' => html_escape($this->input->post('codeD')),
+                    'NOMET' => html_escape($this->input->post('nom')),
+                    'PRENOMET' => html_escape($this->input->post('prenom')),
+                    'EMAIL' => html_escape($this->input->post('email')),
+                    'CV' => html_escape($this->input->post('cv'))
         ));
     }
 
     public function edit_by_numE($numE) {
         $this->db->set(array(
-            'CODEDIP' => $this->input->post('codeD'),
-            'NOMET' => $this->input->post('nom'),
-            'PRENOMET' => $this->input->post('prenom'),
-            'EMAIL' => $this->input->post('email'),
-            'CV' => $this->input->post('cv')
+            'CODEDIP' => html_escape($this->input->post('codeD')),
+            'NOMET' => html_escape($this->input->post('nom')),
+            'PRENOMET' => html_escape($this->input->post('prenom')),
+            'EMAIL' => html_escape($this->input->post('email')),
+            'CV' => html_escape($this->input->post('cv'))
         ));
         $this->db->where('NUMETUDIANT', $numE);
         $this->db->update('etudiants');
     }
-    
+
     public function delete_by_numE($numE) {
         $this->db->delete('etudiants', array('NUMETUDIANT' => $numE));
     }

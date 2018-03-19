@@ -21,11 +21,16 @@ class Programmes_m extends CI_Model {
         return $query->result();
     }
 
-    public function get_all_intitule() {
-        $this->db->distinct();
-        $this->db->select('INTITULEP');
+    public function get_all_only_entitled() {
+        $this->db->select('IDP, INTITULEP');
         $query = $this->db->get('programmes');
-        return $query->result();
+        $aProgrammes = $query->result();
+
+        $aReturn = array();
+        foreach ($aProgrammes as $oProgramme) {
+            $aReturn[$oProgramme->IDP] = $oProgramme->INTITULEP;
+        }
+        return $aReturn;
     }
 
     public function get_by_idP($idP) {
@@ -35,15 +40,15 @@ class Programmes_m extends CI_Model {
 
     public function add() {
         return $this->db->insert('programmes', array(
-                    'INTITULEP' => $this->input->post('intitule'),
-                    'EXPLICATION' => $this->input->post('explication')                    
+                    'INTITULEP' => html_escape($this->input->post('intitule')),
+                    'EXPLICATION' => html_escape($this->input->post('explication'))
         ));
     }
 
     public function edit_by_idP($idP) {
         $this->db->set(array(
-                    'INTITULEP' => $this->input->post('intitule'),
-                    'EXPLICATION' => $this->input->post('explication')
+            'INTITULEP' => html_escape($this->input->post('intitule')),
+            'EXPLICATION' => html_escape($this->input->post('explication'))
         ));
         $this->db->where('IDP', $idP);
         $this->db->update('programmes');

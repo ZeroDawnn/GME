@@ -28,15 +28,15 @@ class Cours_m extends CI_Model {
 
     public function add() {
         return $this->db->insert('cours', array(
-                    'LIBELLECOURS' => $this->input->post('libelle'),
-                    'NBECTS' => $this->input->post('ECTS')
+                    'LIBELLECOURS' => html_escape($this->input->post('libelle')),
+                    'NBECTS' => html_escape($this->input->post('ECTS'))
         ));
     }
 
     public function edit_by_codeC($codeC) {
         $this->db->set(array(
-            'LIBELLECOURS' => $this->input->post('libelle'),
-            'NBECTS' => $this->input->post('ECTS')
+            'LIBELLECOURS' => html_escape($this->input->post('libelle')),
+            'NBECTS' => html_escape($this->input->post('ECTS'))
         ));
         $this->db->where('CODECOURS', $codeC);
         $this->db->update('cours');

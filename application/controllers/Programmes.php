@@ -48,7 +48,6 @@ class Programmes extends CI_Controller {
 
         if ($this->form_validation->run() === FALSE) {
             $aData['action'] = 'edit';
-            // $aData['aProgrammes'] = $this->programmes_m->get_all_intitule();
             $aData['oProgrammes'] = $this->programmes_m->get_by_idP($idP);
 
             $this->load->view('templates/header', $aData);

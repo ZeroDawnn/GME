@@ -9,6 +9,17 @@
             <a class="nav-link" href="<?= base_url('Diplomes/ajouter') ?>">Ajouter un diplôme</a>
         </li>
     </ul>
+    <?= form_open('Diplomes/index'); ?>
+    <div class="form-group">
+        <?php $aUniversites[''] = "Choisissez une université" ?>
+        <?= form_label('Trier par université', 'universite'); ?>
+        <?= form_error('universite'); ?>
+        <?= form_dropdown('universite', $aUniversites, $codeU, array('id' => 'universite', 'class' => 'form-control')) ?>
+    </div>
+    <div class = "form-group">
+        <?= form_submit('valider', 'Trier', array('class' => 'btn btn-primary',)) ?>
+    </div>
+    <?= form_close() ?>
     <table class="table">
         <thead>
             <tr>

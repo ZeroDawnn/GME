@@ -8,18 +8,38 @@ class Cours extends CI_Controller {
         $this->load->helper('url_helper');
     }
 
-    public function index($page = 1) {
+    public function index($page = 1, $codeD = null) {
+        $this->load->model('diplomes_m');
         $this->load->library('pagination');
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules(
+                array(
+                    array(
+                        'field' => 'diplome',
+                        'label' => 'Diplôme',
+                        'rules' => 'required'
+                    )
+                )
+        );
+
+        if ($this->form_validation->run() != FALSE) {
+            redirect('/Diplomes/' . $this->input->post('diplome') . '/Cours/page');
+        }
 
         $limit = 10;
-        $aData['aCours'] = $this->cours_m->get_page($limit, $page * $limit - $limit);
 
-        $config['base_url'] = base_url() . '/Cours/page';
-        $config['total_rows'] = $this->cours_m->get_total_count();
+        //Si aucun diplome n'est selectionné alors on récupere tous les cours sinon on récupere seulement ce du diplome en question
+        $aData['aCours'] = $codeD == null ? $this->cours_m->get_page($limit, $page * $limit - $limit) : $this->cours_m->get_by_codeD_page($codeD, $limit, $page * $limit - $limit);
+        //On précise l'url des pages en fonctions du diplome sélectionné.
+        $config['base_url'] = $codeD == null ? base_url() . '/Cours/page' : base_url() . 'Diplomes/' . $codeD . '/Cours/page';
+        $config['total_rows'] = $codeD == null ? $this->cours_m->get_total_count() : $this->cours_m->get_by_codeD_total_count($codeD);
         $config['per_page'] = $limit;
 
         $this->pagination->initialize($config);
 
+        $aData['codeD'] = $codeD;
+        $aData['aDiplomes'] = $this->diplomes_m->get_all_only_entitled();
         $aData['pagination'] = $this->pagination->create_links();
 
         $this->load->view('templates/header', $aData);

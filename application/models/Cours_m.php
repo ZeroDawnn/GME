@@ -10,6 +10,14 @@ class Cours_m extends CI_Model {
         return $this->db->count_all('cours');
     }
 
+    public function get_by_codeD_total_count($codeD) {
+        $this->db->select('CODECOURS');
+        $this->db->from('cours');
+        $this->db->join('progdiplome', 'cours.CODECOURS = progdiplome.CODECOURS');
+        $this->db->where('CODEDIP',$codeD);
+        return $this->db->count_all_results();
+    }
+
     public function get_all() {
         $query = $this->db->get('cours');
         return $query->result();
@@ -18,6 +26,16 @@ class Cours_m extends CI_Model {
     public function get_page($limit, $start) {
         $this->db->limit($limit, $start);
         $query = $this->db->get('cours');
+        return $query->result();
+    }
+
+    public function get_by_codeD_page($codeD, $limit, $start) {
+        $this->db->limit($limit, $start);
+        $this->db->select('*');
+        $this->db->from('cours');
+        $this->db->join('progdiplome', 'cours.CODECOURS = progdiplome.CODECOURS');
+        $this->db->where('CODEDIP',$codeD);
+        $query = $this->db->get();
         return $query->result();
     }
 

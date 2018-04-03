@@ -9,6 +9,17 @@
             <a class="nav-link" href="<?= base_url('Cours/ajouter') ?>">Ajouter un cours</a>
         </li>
     </ul>
+    <?= form_open('Cours/index'); ?>
+    <div class="form-group">
+        <?php $aDiplomes[''] = "Choisissez un diplôme" ?>
+        <?= form_label('Trier par diplômes', 'diplome'); ?>
+        <?= form_error('diplome'); ?>
+        <?= form_dropdown('diplome', $aDiplomes, $codeD, array('id' => 'diplome', 'class' => 'form-control')) ?>
+    </div>
+    <div class = "form-group">
+        <?= form_submit('valider', 'Trier', array('class' => 'btn btn-primary',)) ?>
+    </div>
+    <?= form_close() ?>
     <table class="table">
         <thead>
             <tr>

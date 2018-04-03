@@ -10,7 +10,7 @@
     <body>
         <div class="container-fluid">
             <div class="row">
-                <nav class="col-xs-3 ">
+                <nav class="col-sm-2">
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link" href="<?= base_url('Diplomes') ?>">
@@ -39,4 +39,4 @@
                         </li>
                     </ul>
                 </nav>
-                <main class="col-xs-9">
+                <main class="col-sm-10">

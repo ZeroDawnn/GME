@@ -10,6 +10,13 @@ class Diplomes_m extends CI_Model {
         return $this->db->count_all('diplomes');
     }
 
+    public function get_by_codeU_total_count($codeU) {
+        $this->db->select('CODEDIP');
+        $this->db->from('diplomes');
+        $this->db->where('CODEU', $codeU);
+        return $this->db->count_all_results();
+    }
+
     public function get_all() {
         $query = $this->db->get('diplomes');
         return $query->result();
@@ -30,6 +37,12 @@ class Diplomes_m extends CI_Model {
     public function get_page($limit, $start) {
         $this->db->limit($limit, $start);
         $query = $this->db->get('diplomes');
+        return $query->result();
+    }
+
+    public function get_by_codeU_page($codeU, $limit, $start) {
+        $this->db->limit($limit, $start);
+        $query = $this->db->get_where('diplomes', array('CODEU' => $codeU));
         return $query->result();
     }
 

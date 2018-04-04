@@ -53,7 +53,6 @@ class Diplomes_m extends CI_Model {
 
     public function add() {
         return $this->db->insert('diplomes', array(
-                    'NUMETUDIANT' => html_escape($this->input->post('numE')),
                     'CODEU' => html_escape($this->input->post('universite')),
                     'INTITULEDIP' => html_escape($this->input->post('intitule')),
                     'ADRESSEWEBD' => html_escape($this->input->post('adresseWeb')),

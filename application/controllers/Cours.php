@@ -9,7 +9,6 @@ class Cours extends CI_Controller {
     }
 
     public function index($page = 1, $codeD = null) {
-        $this->load->model('diplomes_m');
         $this->load->library('pagination');
         $this->load->library('form_validation');
 
@@ -27,9 +26,12 @@ class Cours extends CI_Controller {
             redirect('/Diplomes/' . $this->input->post('diplome') . '/Cours/page');
         }
 
-        $limit = 10;
+        $this->load->model('diplomes_m');
 
-        //Si aucun diplome n'est selectionné alors on récupere tous les cours sinon on récupere seulement ce du diplome en question
+        $limit = 10;
+        $aData['codeD'] = $codeD;
+        $aData['aDiplomes'] = $this->diplomes_m->get_all_only_entitled();
+        //Si aucun diplome n'est selectionné alors on récupere tous les cours sinon on récupere seulement ceux du diplome en question
         $aData['aCours'] = $codeD == null ? $this->cours_m->get_page($limit, $page * $limit - $limit) : $this->cours_m->get_by_codeD_page($codeD, $limit, $page * $limit - $limit);
         //On précise l'url des pages en fonctions du diplome sélectionné.
         $config['base_url'] = $codeD == null ? base_url() . '/Cours/page' : base_url() . 'Diplomes/' . $codeD . '/Cours/page';
@@ -38,8 +40,6 @@ class Cours extends CI_Controller {
 
         $this->pagination->initialize($config);
 
-        $aData['codeD'] = $codeD;
-        $aData['aDiplomes'] = $this->diplomes_m->get_all_only_entitled();
         $aData['pagination'] = $this->pagination->create_links();
 
         $this->load->view('templates/header', $aData);

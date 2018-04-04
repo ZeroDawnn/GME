@@ -10,6 +10,14 @@ class Contrats_m extends CI_Model {
         return $this->db->count_all('contrats');
     }
 
+    public function get_by_codeU_total_count($codeU) {
+        $this->db->select('IDCONTRAT');
+        $this->db->from('contrats');
+        $this->db->join('diplomes', 'diplomes.CODEDIP = contrats.CODEDIP');
+        $this->db->where('CODEU', $codeU);
+        return $this->db->count_all_results();
+    }
+
     public function get_all() {
         $query = $this->db->get('contrats');
         return $query->result();
@@ -18,6 +26,16 @@ class Contrats_m extends CI_Model {
     public function get_page($limit, $start) {
         $this->db->limit($limit, $start);
         $query = $this->db->get('contrats');
+        return $query->result();
+    }
+    
+    public function get_by_codeU_page($codeU, $limit, $start) {
+        $this->db->limit($limit, $start);
+        $this->db->select('*');
+        $this->db->from('contrats');
+        $this->db->join('diplomes', 'diplomes.CODEDIP = contrats.CODEDIP');
+        $this->db->where('CODEU', $codeU);
+        $query = $this->db->get();
         return $query->result();
     }
 

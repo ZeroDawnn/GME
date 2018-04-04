@@ -11,17 +11,41 @@ class Contrats extends CI_Controller {
         $this->load->helper('url_helper');
     }
 
-    public function index($page = 1) {
+    public function index($page = 1, $codeU = null) {
         $this->load->library('pagination');
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules(
+                array(
+                    array(
+                        'field' => 'universite',
+                        'label' => 'Université',
+                        'rules' => 'required'
+                    )
+                )
+        );
+
+        if ($this->form_validation->run() != FALSE) {
+            redirect('/Universites/' . $this->input->post('universite') . '/Contrats/page');
+        }
+
+        $this->load->model('universites_m');
 
         $limit = 10;
+        $aData['codeU'] = $codeU;
+        $aData['aUniversites'] = $this->universites_m->get_all_only_name();
         $aData['aDiplomes'] = $this->diplomes_m->get_all_only_entitled();
         $aData['aDemandesMobilites'] = $this->demandes_mobilites_m->get_all_only_ref();
         $aData['aProgrammes'] = $this->programmes_m->get_all_only_entitled();
         $aData['aContrats'] = $this->contrats_m->get_page($limit, $page * $limit - $limit);
-
         $config['base_url'] = base_url() . '/Contrats/page';
         $config['total_rows'] = $this->contrats_m->get_total_count();
+        //Si aucune université n'est selectionné alors on récupere tous les contrats sinon on récupere seulement ceux de l'université en question
+        $aData['aContrats'] = $codeU == null ? $this->contrats_m->get_page($limit, $page * $limit - $limit) : $this->contrats_m->get_by_codeU_page($codeU, $limit, $page * $limit - $limit);
+        //On précise l'url des pages en fonctions de l'université sélectionné.
+        $config['base_url'] = $codeU == null ? base_url() . '/Contrats/page' : base_url() . 'Universites/' . $codeU . '/Contrats/page';
+        $config['total_rows'] = $codeU == null ? $this->contrats_m->get_total_count() : $this->contrats_m->get_by_codeU_total_count($codeU);
+
         $config['per_page'] = $limit;
 
         $this->pagination->initialize($config);

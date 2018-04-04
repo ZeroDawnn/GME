@@ -64,5 +64,7 @@ $route['Programmes/page'] = 'Programmes/index/1';
 $route['Programmes/page/(:num)'] = 'Programmes/index/$1';
 $route['Contrats/page'] = 'Contrats/index/1';
 $route['Contrats/page/(:num)'] = 'Contrats/index/$1';
+$route['Universites/(:num)/Contrats/page'] = 'Contrats/index/1/$1';
+$route['Universites/(:num)/Contrats/page/(:num)'] = 'Contrats/index/$2/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
